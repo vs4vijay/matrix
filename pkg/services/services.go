@@ -17,8 +17,8 @@ func (services *Services) Get(serviceName string) Service {
 		service := new(HttpService)
 		service.Init()
 		servicesContainer[serviceName] = service
-	} else if serviceName == "FakeDataService" {
-		service := new(FakeDataService)
+	} else if serviceName == "DataService" {
+		service := new(DataService)
 		service.Init()
 		servicesContainer[serviceName] = service
 	}

@@ -1,36 +1,41 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"net/http"
+	"os"
 
-	// . "models"
-	. "github.com/vs4vijay/matrix/pkg/services"
+	"github.com/vs4vijay/matrix/pkg/handlers"
+	server "github.com/vs4vijay/matrix/pkg/web"
+)
+
+var (
+	logger *log.Logger
+	port   string = os.Getenv("SERVER_PORT")
 )
 
 func init() {
-	log.SetPrefix("LOG: ")
+	logger = log.New(os.Stdout, "matrix: ", log.LstdFlags|log.Lshortfile)
 }
 
 func main() {
-	log.Println("Event Matrix")
-	//services := new(Services)
-	//httpService := services.Get("HttpService")
-	httpService := new(HttpService)
-	//httpService.Init()
+	logger.Println("Initializing Matrix")
 
-	// comm := make(chan string)
+	mux := http.NewServeMux()
 
-	httpService.MakeServer("/yo")
+	h := handlers.NewHandler(logger)
+	h.SetupRoutes(mux)
 
-	// comm <- "heyy"
+	if port == "" {
+		port = "9090"
+	}
 
-	fakeDataService := new(FakeDataService)
-	fakeDataService.Init()
+	address := ":" + port
+	srv := server.New(mux, address)
 
-	name := fakeDataService.FirstName()
+	logger.Printf("Starting Matrix Server at %s\n", port)
 
-	fmt.Printf("name 1 %+v", name)
-
-	// comm <- "hahah"
+	if err := srv.ListenAndServe(); err != nil {
+		logger.Fatalf("Server failed to start: %v", err)
+	}
 }
