@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/vs4vijay/matrix/pkg/services"
+	"matrix/pkg/services"
 )
 
 type Handler struct {

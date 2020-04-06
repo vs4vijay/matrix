@@ -1,7 +1,7 @@
 package services
 
 import (
-	. "github.com/vs4vijay/matrix/pkg/interfaces"
+	. "matrix/pkg/interfaces"
 )
 
 type Services struct {

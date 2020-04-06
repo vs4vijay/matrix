@@ -1,4 +1,4 @@
-module github.com/vs4vijay/matrix
+module matrix
 
 go 1.14
 

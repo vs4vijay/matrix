@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/vs4vijay/matrix/pkg/handlers"
-	server "github.com/vs4vijay/matrix/pkg/web"
+	"matrix/pkg/handlers"
+	server "matrix/pkg/web"
 )
 
 var (
