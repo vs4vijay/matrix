@@ -9,8 +9,8 @@ func main() {
 	id := 9
 
 	var items [3]int
-	trips := [4]int{2,3,4,5} 
-	jobs := []int{1,1}
+	trips := [4]int{2, 3, 4, 5}
+	jobs := []int{1, 1}
 
 	fmt.Println(id)
 	fmt.Println(jobs)

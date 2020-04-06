@@ -1,14 +1,13 @@
 package services
 
 import (
-	. "interfaces"
+	. "github.com/vs4vijay/matrix/pkg/interfaces"
 )
 
 type Services struct {
-
 }
 
-func(services *Services) Get(serviceName string) Service {
+func (services *Services) Get(serviceName string) Service {
 	servicesContainer := make(map[string]Service)
 	service, ok := servicesContainer[serviceName]
 

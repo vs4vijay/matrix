@@ -1,23 +1,23 @@
 package services
 
 import (
-	"log"
 	"fmt"
+	"log"
+
 	// "io"
 	"net/http"
 	// "net/url"
-
-	)
+)
 
 type HttpService struct {
 	ServerPort string
 }
 
-func(httpService *HttpService) Init() {
+func (httpService *HttpService) Init() {
 	httpService.ServerPort = "9999"
 }
 
-func(httpService HttpService) MakeServer(route string) {
+func (httpService HttpService) MakeServer(route string) {
 	hostAndPort := ":" + httpService.ServerPort
 	log.Println("Starting Webserver at", hostAndPort)
 
@@ -41,6 +41,3 @@ func(httpService HttpService) MakeServer(route string) {
 // func(httpService HttpService) PostForm(url string, formData url.Values) {
 // 	resp, err := http.PostForm(url, formData)
 // }
-
-
-

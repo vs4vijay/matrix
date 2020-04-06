@@ -1,28 +1,33 @@
-# 0xMatrix
+# matrix
 
 
 ## Prerequisite
 
-- Setup GOPATH
+- Latest Go (`brew install golang`)
+- Setup GOPATH (If you're using go version < 1.11)
 ```
 export GOPATH=$HOME/golib
 export GOPATH=$GOPATH:$HOME/github/0xMatrix
 ```
 
-- Install dependencies
-`go get github.com/icrowley/fake`
+---
 
-
-## Running
+## Development
 
 `go run src/main.go`
 
+---
 
-### External Libraries
-- https://github.com/rivo/tview
+## ToDo
 
+- [ ] Logging
 
-## Misc
+---
+
+```
+
+https://github.com/rivo/tview
+
 
 Config - github.com/spf13/viper
 
@@ -36,7 +41,4 @@ URL.QueryEscape
 
 https://www.jsonstore.io/da0e87e759b30f08825fd3b99adc0e42160c3be842c83ca8c1cec9698f58ffb2
 
-## ToDo
----
-
-- [ ] Logging
+```

@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+
 	// . "models"
-	. "services"
+	. "github.com/vs4vijay/matrix/pkg/services"
 )
 
 func init() {
@@ -20,7 +21,7 @@ func main() {
 
 	// comm := make(chan string)
 
-	go httpService.MakeServer("/yo")
+	httpService.MakeServer("/yo")
 
 	// comm <- "heyy"
 
