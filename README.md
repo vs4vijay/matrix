@@ -41,4 +41,8 @@ URL.QueryEscape
 
 https://www.jsonstore.io/da0e87e759b30f08825fd3b99adc0e42160c3be842c83ca8c1cec9698f58ffb2
 
+json.NewDecoder(r.Body).Decode(&req)
+
+json.NewEncoder(rw).Encode(...)
+
 ```
