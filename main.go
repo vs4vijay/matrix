@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"time"
 
 	"matrix/pkg/handlers"
 	server "matrix/pkg/web"
@@ -33,9 +36,24 @@ func main() {
 	address := ":" + port
 	srv := server.New(mux, address)
 
-	logger.Printf("Starting Matrix Server at %s\n", port)
+	go func () {
+		logger.Printf("Starting Matrix Server at %s\n", port)
+		if err := srv.ListenAndServe(); err != nil {
+			logger.Fatalf("Server failed to start: %v", err)
+			os.Exit(1)
+		}
+	}()
 
-	if err := srv.ListenAndServe(); err != nil {
-		logger.Fatalf("Server failed to start: %v", err)
-	}
+	// Trap sigterm or interrupt to gracefully shutdown the server
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt)
+	signal.Notify(sigChan, os.Kill)
+
+	// Block until a signal is received.
+	sig := <-sigChan
+	logger.Printf("Got signal: %v, shutting down the server\n", sig)
+
+	// gracefully shutdown the server, waiting max 30 seconds for current operations to complete
+	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	srv.Shutdown(ctx)
 }

@@ -43,7 +43,7 @@ func (h *Handler) Index(rw http.ResponseWriter, request *http.Request) {
 func (h *Handler) LoggerMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		startTime := time.Now()
-		defer h.logger.Printf("request(%s) processed in %s\n", r.RequestURI, time.Now().Sub(startTime))
+		defer h.logger.Printf("request(%s) processed in %s\n", r.URL, time.Now().Sub(startTime))
 		next(w, r)
 	}
 }
