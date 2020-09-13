@@ -36,7 +36,7 @@ func main() {
 	address := ":" + port
 	srv := server.New(mux, address)
 
-	go func () {
+	go func() {
 		logger.Printf("Starting Matrix Server at %s\n", port)
 		if err := srv.ListenAndServe(); err != nil {
 			logger.Fatalf("Server failed to start: %v", err)
