@@ -14,7 +14,7 @@ ADD . /app/
 RUN CGO_ENABLED=0 go build -o /app/matrix .
 
 # Deploy stage
-FROM alpine:latest
+FROM alpine:3.15.4
 
 # Secure against running as root
 RUN adduser -D -u 10000 matrix
