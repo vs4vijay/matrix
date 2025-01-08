@@ -8,6 +8,8 @@ import (
 	"os/signal"
 	"time"
 
+
+	"matrix/cmd"
 	"matrix/pkg/handlers"
 	server "matrix/pkg/web"
 )
@@ -48,6 +50,13 @@ func main() {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
 	signal.Notify(sigChan, os.Kill)
+
+	
+
+	// if err := cmd.RootCmd.Execute(); err != nil {
+	// 	log.Error(err)
+	// 	os.Exit(1)
+	// }
 
 	// Block until a signal is received.
 	sig := <-sigChan

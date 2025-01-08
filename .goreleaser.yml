@@ -1,0 +1,76 @@
+before:
+  hooks:
+    - go mod download
+
+dist: bin
+
+builds:
+- env:
+  - CGO_ENABLED=0
+  ldflags:
+    - -s -w
+    - -X=github.com/vs4vijay/matrix/pkg/version.SemVer={{ .Version }}
+    - -X=github.com/vs4vijay/matrix/pkg/version.GitCommit={{ .Commit }}
+    - -X=github.com/vs4vijay/matrix/pkg/version.BuildTime={{ .Date }}
+  goos:
+    - darwin
+    - linux
+    - windows
+  goarch:
+    - amd64
+    - 386
+
+brews:
+  - name: matrix
+    github:
+      owner: vs4vijay
+      name: homebrew-tap
+    url_template: "https://github.com/vs4vijay/matrix/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_author:
+      name: Vijay Soni (vs4vijay)
+      email: vs4vijay@gmail.com
+    folder: Formula
+    description: "matrix - Software for fun and profit"
+    skip_upload: false
+    install: |
+      bin.install "matrix"
+    test: |
+      system "#{bin}/matrix version"
+
+nfpms:
+  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    homepage:  https://github.com/vs4vijay/matrix
+    description: "matrix - Software for fun and profit"
+    maintainer: Vijay Soni <vs4vijay@gmail.com>
+    license: MIT
+    formats:
+      - deb
+      - rpm
+
+#snapcrafts:
+#  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+#    summary: "matrix"
+#    description: "matrix - Software for fun and profit"
+#    grade: stable
+#    confinement: classic
+#    publish: true
+
+archives:
+- replacements:
+    darwin: mac
+    linux: linux
+    windows: windows
+    386: i386
+    amd64: x86_64
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  filters:
+    exclude:
+    - "^docs:"
+    - "^test:"
